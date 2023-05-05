@@ -8,8 +8,9 @@ export const HomeScreen = ({navigation}) => {
 <ImageBackground source={Background} resizeMode="cover" style={styles.image}>
   <View style={styles.container}>
   <Text style={styles.text}>Home Screen</Text>
+  <Text style={styles.text}>Please Sign In to see more...</Text>
   <Button
-    title="Go to Details"
+    title="Sign In"
     onPress={() => navigation.navigate('Login')}
   />
 </View>
