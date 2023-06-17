@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
 import { Card, TextInput, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native";
@@ -6,7 +6,9 @@ import { loginStyle } from "../styles/loginStyle";
 import SvgUri from "react-native-svg-uri";
 import Heritagelogo from "../images/heritagelogo.svg";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
+  const [passwordVisible, setPasswordVisible] = useState(true);
+
   return (
     <SafeAreaView style={loginStyle.content}>
       <View>
@@ -22,8 +24,14 @@ export const LoginScreen = () => {
           <TextInput
             style={loginStyle.textInput}
             label="Password"
-            secureTextEntry={true}
-          ></TextInput>
+            secureTextEntry={passwordVisible}
+            right={
+              <TextInput.Icon
+                icon={passwordVisible ? "eye" : "eye-off"}
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              />
+            }
+          />
           <Button style={loginStyle.cardButton}>Forgot email/password</Button>
           <Button style={loginStyle.cardButton} mode="contained">
             Login
@@ -31,7 +39,12 @@ export const LoginScreen = () => {
           <Text style={loginStyle.textStyle}>
             If not registered please tap below:
           </Text>
-          <Button mode="outlined">Register</Button>
+          <Button
+            mode="outlined"
+            onPress={() => navigation.navigate("Registration")}
+          >
+            Register
+          </Button>
         </Card.Content>
       </Card>
     </SafeAreaView>

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
-export const loginStyle = StyleSheet.create({
+export const registrationStyle = StyleSheet.create({
   content: {
     display: "flex",
     flex: 1,
@@ -30,5 +30,8 @@ export const loginStyle = StyleSheet.create({
   },
   textInput: {
     backgroundColor: "transparent",
+  },
+  icon: {
+    color: "rgb(103,80,164)",
   },
 });
