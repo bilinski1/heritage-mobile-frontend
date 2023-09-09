@@ -1,8 +1,12 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View, Button } from "react-native";
-
+import { useDispatch, useSelector } from "react-redux";
 const Background = require("../../assets/background.png");
+
+
+
 export const HomeScreen = ({ navigation }) => {
+  const auth = useSelector((state) => state.auth);
   return (
     <ImageBackground
       source={Background}
