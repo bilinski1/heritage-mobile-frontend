@@ -6,8 +6,46 @@ import { loginStyle } from "../styles/loginStyle";
 import SvgUri from "react-native-svg-uri";
 import Heritagelogo from "../images/heritagelogo.svg";
 
+
+
 export const LoginScreen = ({ navigation }) => {
   const [passwordVisible, setPasswordVisible] = useState(true);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+
+  const handleLogin = async () => {
+    try {
+      // Send login request to the server
+      const response = await axios.post('http://10.0.2.2:8080/api/v1/auth/signin', formData);
+
+      if (response.status === 200) {
+        const { token, message } = response.data;
+
+        // Save the JWT token to local storage (AsyncStorage)
+        await AsyncStorage.setItem('jwtToken', token);
+
+        Alert.alert('Sukces!', message, [
+          {
+            text: 'OK',
+            onPress: () => {
+              // Navigate to the protected area or home screen
+              navigation.navigate('HomeScreen'); // Change to your actual target screen
+            }
+          }
+        ]);
+      }
+    } catch (error) {
+      // Handle errors (e.g., invalid credentials, server error)
+      Alert.alert(
+          'Błąd logowania',
+          error.response?.data?.message || 'Nieprawidłowy e-mail lub hasło.'
+      );
+    }
+  };
+
 
   return (
     <SafeAreaView style={loginStyle.content}>
