@@ -15,6 +15,25 @@ export const LoginScreen = ({ navigation }) => {
     password: ''
   });
 
+  const onSubmit = async (data) => {
+    try {
+      const response = await apiClient.post('/login', {
+        email: data.email,
+        password: data.password,
+      });
+
+      // Przechowywanie tokenu w Secure Store
+      const { token } = response.data;
+      await SecureStore.setItemAsync('jwtToken', token);
+
+      Alert.alert('Sukces', 'Logowanie pomyślne!');
+      navigation.navigate('HomeScreen'); // Przekierowanie po zalogowaniu
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Błąd', 'Nieprawidłowe dane logowania');
+    }
+  };
+
 
   const handleLogin = async () => {
     try {
@@ -71,7 +90,7 @@ export const LoginScreen = ({ navigation }) => {
             }
           />
           <Button style={loginStyle.cardButton}>Forgot email/password</Button>
-          <Button style={loginStyle.cardButton} mode="contained">
+          <Button style={loginStyle.cardButton} mode="contained" title="Login" onPress={handleLogin(onSubmit)}>
             Login
           </Button>
           <Text style={loginStyle.textStyle}>
