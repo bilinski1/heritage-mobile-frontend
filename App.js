@@ -1,10 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
 import { RegistrationScreen } from "./src/screens/RegistrationScreen";
-import { StatusBar } from "expo-status-bar";
 import { Provider as PaperProvider } from "react-native-paper";
 import { theme } from "./src/styles/appStyle";
 import { UserProfile } from "./src/screens/DeveloperFirstPage";

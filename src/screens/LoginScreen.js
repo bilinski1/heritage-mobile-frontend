@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
+import {ImageBackground, StyleSheet, Text, View, Image, Alert} from "react-native";
 import { Card, TextInput, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native";
 import { loginStyle } from "../styles/loginStyle";
 import SvgUri from "react-native-svg-uri";
 import Heritagelogo from "../images/heritagelogo.svg";
+import * as SecureStore from "expo-secure-store";
+import axios from "axios";
+import {useNavigation} from "@react-navigation/native";
+
+
 
 
 
@@ -15,17 +20,21 @@ export const LoginScreen = ({ navigation }) => {
     password: ''
   });
 
-  const onSubmit = async (data) => {
+/*
+  console.log('Data being sent:', formData);
+  const onSubmit = async (formData) => {
     try {
-      const response = await apiClient.post('/login', {
-        email: data.email,
-        password: data.password,
+      console.log('Data being sent:', formData);
+      const response = await apiClie.post('/login', {
+        email: formData.email,
+        password: formData.password,
       });
+
+
 
       // Przechowywanie tokenu w Secure Store
       const { token } = response.data;
       await SecureStore.setItemAsync('jwtToken', token);
-
       Alert.alert('Sukces', 'Logowanie pomyślne!');
       navigation.navigate('HomeScreen'); // Przekierowanie po zalogowaniu
     } catch (error) {
@@ -33,10 +42,11 @@ export const LoginScreen = ({ navigation }) => {
       Alert.alert('Błąd', 'Nieprawidłowe dane logowania');
     }
   };
-
+    */
 
   const handleLogin = async () => {
     try {
+
       // Send login request to the server
       const response = await axios.post('http://10.0.2.2:8080/api/v1/auth/signin', formData);
 
@@ -44,14 +54,15 @@ export const LoginScreen = ({ navigation }) => {
         const { token, message } = response.data;
 
         // Save the JWT token to local storage (AsyncStorage)
-        await AsyncStorage.setItem('jwtToken', token);
+        await SecureStore.setItemAsync('jwtToken', token);
+        console.log(token);
 
         Alert.alert('Sukces!', message, [
           {
             text: 'OK',
             onPress: () => {
               // Navigate to the protected area or home screen
-              navigation.navigate('HomeScreen'); // Change to your actual target screen
+              navigation.navigate('UserProfile'); // Change to your actual target screen
             }
           }
         ]);
@@ -77,11 +88,15 @@ export const LoginScreen = ({ navigation }) => {
             style={loginStyle.textInput}
             label="Email"
             keyboardType="email-address"
+            value={formData.email}
+            onChangeText={(text) => setFormData({ ...formData, email: text })}
           ></TextInput>
           <TextInput
             style={loginStyle.textInput}
             label="Password"
             secureTextEntry={passwordVisible}
+            value={formData.password}
+            onChangeText={(text) => setFormData({ ...formData, password: text })}
             right={
               <TextInput.Icon
                 icon={passwordVisible ? "eye" : "eye-off"}
@@ -90,7 +105,7 @@ export const LoginScreen = ({ navigation }) => {
             }
           />
           <Button style={loginStyle.cardButton}>Forgot email/password</Button>
-          <Button style={loginStyle.cardButton} mode="contained" title="Login" onPress={handleLogin(onSubmit)}>
+          <Button style={loginStyle.cardButton} mode="contained" title="Login" onPress={handleLogin}>
             Login
           </Button>
           <Text style={loginStyle.textStyle}>

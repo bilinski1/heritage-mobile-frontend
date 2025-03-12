@@ -5,12 +5,12 @@ import {registrationStyle} from "../styles/registrationStyle";
 import Heritagelogo from "../images/heritagelogo.svg";
 import {Card, TextInput, Button} from "react-native-paper";
 import {useForm, Controller} from 'react-hook-form';
-import Button2 from "../components/button"
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigation} from "@react-navigation/native";
-import {registerUser} from "../features/authSlice";
 import axios from "axios";
 import {NavigationActions as navigation} from "react-navigation";
+import {registerUser} from "../features/authSlice";
+
 
 export const RegistrationScreen = () => {
     const navigation = useNavigation();
