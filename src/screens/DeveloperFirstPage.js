@@ -35,7 +35,7 @@ export const UserProfile = ({ navigation }) => {
             source={require("../../assets/person-icon.jpg")}
           />
           <View style={UserProfileStyle.heading}>
-            <Text style={UserProfileStyle.name}>Mateusz Kowalski</Text>
+            <Text style={UserProfileStyle.name}>Mateusz Kowalskigit</Text>
             <Text style={UserProfileStyle.title}>Junior Web Developer</Text>
           </View>
           <View>
