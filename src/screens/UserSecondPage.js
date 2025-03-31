@@ -1,19 +1,16 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View, Button } from "react-native";
-import { Surface } from "react-native-paper";
 import { Avatar } from "react-native-paper";
 import { Badge } from "react-native-paper";
-import { Chip } from "react-native-paper";
 import { UserProfileStyle } from "../styles/userProfileStyle";
 import Timeline from 'react-native-timeline-flatlist';
-import { useState } from "react";
-import PieChart from 'react-native-pie-chart'
-import { IconButton, MD3Colors } from 'react-native-paper';
+
 
 
 
 const Background = require("../../assets/background.png");
 
+let data;
 data = [
     {time: '12/12/2022', title: 'Event 1', description: 'Event 1 Description'},
     {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
@@ -77,7 +74,7 @@ export const UserProfileDetails = ({ navigation }) => {
           <Timeline
           style={UserProfileStyle.list}
           data={data}
-          descriptionStyle={{color:'black'}}
+          descriptionStyle={{color:'#000000'}}
           timeContainerStyle={{minWidth:72}}
         />
         </View>

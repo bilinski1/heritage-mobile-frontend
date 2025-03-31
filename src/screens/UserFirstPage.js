@@ -17,8 +17,15 @@ const Background = require("../../assets/background.png");
 export const UserProfile = ({ navigation }) => {
  
     const widthAndHeight = 250
-    const series = [123, 321, 123, 500, 537, 300]
-    const sliceColor = ['#fbd203', '#ffb300', '#ff9100', '#ff6c00', '#ff3c00', '#000']
+    const series =   [
+        { value: 430, color: '#fbd203' },
+        { value: 321, color: '#ffb300' },
+        { value: 185, color: '#ff9100' },
+        { value: 123, color: '#ff6c00' } ]
+    const sliceColor = ['#fbd203', '#ffb300', '#ff9100', '#ff6c00', '#ff3c00', '#000000']
+    const defaultColor = '#CCCCCC';
+
+  const validatedSliceColor = series.map((_, index) => sliceColor[index] || defaultColor);
 
 
   return (
@@ -135,16 +142,16 @@ export const UserProfile = ({ navigation }) => {
             margin: 0
           }}>PHP/Wordpress</Text>
         </View>
-        
+
         <PieChart
             widthAndHeight={widthAndHeight}
             series={series}
-            sliceColor={sliceColor}
+            sliceColor={validatedSliceColor}
             coverRadius={0.45}
             coverFill={"rgb(109,49,158)"}
-            style={UserProfileStyle.piechart}
+           style={UserProfileStyle.piechart}
           />
-          
+
         </View>
 
       </View>

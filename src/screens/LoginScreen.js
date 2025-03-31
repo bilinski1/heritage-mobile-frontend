@@ -3,13 +3,9 @@ import {ImageBackground, StyleSheet, Text, View, Image, Alert} from "react-nativ
 import { Card, TextInput, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native";
 import { loginStyle } from "../styles/loginStyle";
-import SvgUri from "react-native-svg-uri";
 import Heritagelogo from "../images/heritagelogo.svg";
 import * as SecureStore from "expo-secure-store";
 import axios from "axios";
-import {useNavigation} from "@react-navigation/native";
-
-
 
 
 
@@ -99,7 +95,7 @@ export const LoginScreen = ({ navigation }) => {
             onChangeText={(text) => setFormData({ ...formData, password: text })}
             right={
               <TextInput.Icon
-                icon={passwordVisible ? "eye" : "eye-off"}
+                icon={passwordVisible ? "eye-off" : "eye"}
                 onPress={() => setPasswordVisible(!passwordVisible)}
               />
             }

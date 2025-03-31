@@ -25,6 +25,10 @@ export const HomeScreen = ({ navigation }) => {
           title="User's View"
           onPress={() => navigation.navigate("UserProfile")}
         />
+        <Button
+            title="Przeglądaj oferty"
+            onPress={() => navigation.navigate("JobOffersSwiper")}
+        />
       </View>
     </ImageBackground>
   );
