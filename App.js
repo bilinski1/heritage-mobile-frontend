@@ -10,12 +10,14 @@ import { UserProfileDetails } from "./src/screens/UserSecondPage";
 import { store } from './src/store';
 import { Provider } from "react-redux";
 import { JobOffersSwiper } from "./src/screens/JobOffersSwiper";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
+      <GestureHandlerRootView>
     <Provider store={store}>
     <PaperProvider theme={theme}>
       <NavigationContainer>
@@ -25,11 +27,12 @@ const App = () => {
           <Stack.Screen name="Registration" component={RegistrationScreen} options={{ title: 'Sign Up' }}/>
           <Stack.Screen name="UserProfile" component={UserProfile} options={{ title: 'User Portfolio' }}/>
           <Stack.Screen name="UserProfileDetails" component={UserProfileDetails} options={{ title: 'Details' }}/>
-          <Stack.Screen name="JobOffersSwiper" component={JobOffersSwiper} options={{ title: 'Swiper' }}/>
+          <Stack.Screen name="JobOffersSwiper" component={JobOffersSwiper} options={{ title: 'Swiper', headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
     </Provider>
+        </GestureHandlerRootView>
   );
 };
 
